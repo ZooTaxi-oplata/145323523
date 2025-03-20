@@ -35,20 +35,31 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Инициализация Telegram WebApp
 if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-    // Расширяем приложение на полный экран
-    Telegram.WebApp.expand();
+    Telegram.WebApp.expand();  // Включаем полноэкранный режим
+    Telegram.WebApp.ready();   // Готовим приложение
 
-    // Отключаем прокрутку через CSS
-    document.body.style.overflow = "hidden";
+    // Показать уведомление
+    Telegram.WebApp.showAlert("Привет! Это уведомление от Telegram Web App.");
 
-    // Дополнительно корректируем высоту страницы
-    function adjustHeight() {
-        document.body.style.height = `${window.innerHeight}px`;
-        document.documentElement.style.height = `${window.innerHeight}px`;
-    }
-
-    adjustHeight();
-    window.addEventListener('resize', adjustHeight);
+    // Или всплывающее окно
+    Telegram.WebApp.showPopup({
+        title: "Важное уведомление",
+        message: "Ты получил новое сообщение!",
+        buttons: [
+            {
+                text: "Принять",
+                action: function() {
+                    console.log("Пользователь принял уведомление");
+                }
+            },
+            {
+                text: "Отклонить",
+                action: function() {
+                    console.log("Пользователь отклонил уведомление");
+                }
+            }
+        ]
+    });
 }
+
