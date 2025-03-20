@@ -34,3 +34,21 @@ document.addEventListener('DOMContentLoaded', function() {
     copyToClipboard(amountText);
   });
 });
+
+// Инициализация Telegram WebApp
+if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+    // Расширяем приложение на полный экран
+    Telegram.WebApp.expand();
+
+    // Отключаем прокрутку через CSS
+    document.body.style.overflow = "hidden";
+
+    // Дополнительно корректируем высоту страницы
+    function adjustHeight() {
+        document.body.style.height = `${window.innerHeight}px`;
+        document.documentElement.style.height = `${window.innerHeight}px`;
+    }
+
+    adjustHeight();
+    window.addEventListener('resize', adjustHeight);
+}
